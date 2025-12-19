@@ -1,5 +1,5 @@
 
-**Simple BMI Calculator in C**  
+**Simple BMI Calculator in C and Python**  
 
 
 ## 📝 Description
