@@ -1,24 +1,48 @@
+# BMI Calculator — C & Python
 
-**Simple BMI Calculator in C and Python**  
+[![Tests](https://github.com/mohammmad357/Simple-BMI-Calculator-in-C/actions/workflows/tests.yml/badge.svg)](https://github.com/mohammmad357/Simple-BMI-Calculator-in-C/actions/workflows/tests.yml)
 
+A validated Body Mass Index calculator implemented in C and Python. It accepts mass in kilograms and height in metres, calculates BMI, and returns an adult BMI category.
 
-## 📝 Description
-A simple program to calculate Body Mass Index (BMI) and categorize weight.  
-This project is meant for **learning C basics** including:
+## Categories
 
-- Handling user input
-- Conditional statements
-- Arithmetic operations
-- String handling
+| BMI | Category |
+| ---: | --- |
+| Below 18.5 | Underweight |
+| 18.5–24.9 | Normal weight |
+| 25.0–29.9 | Overweight |
+| 30.0 and above | Obese |
 
+## Python
 
-## ⚙️ Features
-- Calculate BMI from user input (mass in kg, height in meters)
-- Categorize BMI into Underweight, Normal, Overweight, or Obese
-- Display result in a user-friendly format
+```bash
+python BMI_Calculator.py
+python -m unittest -v
+```
 
-The program then displays the health status according to the WHO standard:
-  - Under 18.5 → Underweight
-  - 18.5 to 24.9 → Normal weight
-  - 25 to 29.9 → Overweight
-  - 30 and above → Obese
+## C
+
+```bash
+gcc -std=c11 -Wall -Wextra -Werror -pedantic BMI_Calculator.c -o bmi_calculator
+./bmi_calculator
+```
+
+Run the C tests with:
+
+```bash
+gcc -std=c11 -Wall -Wextra -Werror -pedantic -DBMI_CALCULATOR_NO_MAIN BMI_Calculator.c test_bmi_calculator.c -o test_bmi_calculator
+./test_bmi_calculator
+```
+
+## Reliability improvements
+
+- Rejects zero, negative, non-numeric, and non-finite measurements.
+- Uses non-overlapping category boundaries.
+- Covers the underweight, normal, overweight, and obese branches in both languages.
+- Runs Python and C checks automatically with GitHub Actions.
+
+> BMI is a screening value, not a medical diagnosis. Individual health assessment should be discussed with a qualified professional.
+
+## License
+
+Released under the [MIT License](LICENSE).

@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*.exe
+*.out
+bmi_calculator
+test_bmi_calculator
+.vscode/

@@ -1,40 +1,60 @@
-/* this is calculating bmi */
-
+#include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
-int mass;
-float height;
-float bmi;
-char a[20];
+bool calculate_bmi(double mass_kg, double height_m, double *result)
+{
+    if (result == NULL || !isfinite(mass_kg) || !isfinite(height_m) ||
+        mass_kg <= 0.0 || height_m <= 0.0) {
+        return false;
+    }
+    *result = mass_kg / (height_m * height_m);
+    return true;
+}
 
+const char *bmi_category(double bmi)
+{
+    if (!isfinite(bmi) || bmi < 0.0) {
+        return "Invalid";
+    }
+    if (bmi < 18.5) {
+        return "Underweight";
+    }
+    if (bmi < 25.0) {
+        return "Normal weight";
+    }
+    if (bmi < 30.0) {
+        return "Overweight";
+    }
+    return "Obese";
+}
+
+#ifndef BMI_CALCULATOR_NO_MAIN
 int main(void)
 {
-    printf("Please Inter Your Mass : ");
-    scanf("%d" ,  &mass);
+    double mass;
+    double height;
+    double bmi;
 
-    printf("Please Inter Your Height : ");
-    scanf("%f" ,  &height);
-
-    bmi = (mass) / (height * height);
-    printf("BMI VALUES \nUnderweight :   less than 18.5\nNormal :        between 18.8 and 24.9\nOverweight :    between 24.9 and 29.9\nObese :         30 or greater\nYour BMI : %.2f" , bmi);
-    
-    if (bmi < 18.5)
-    {
-        strcpy(a, "underweight");
+    printf("Mass (kg): ");
+    if (scanf("%lf", &mass) != 1) {
+        fprintf(stderr, "Error: mass must be a number.\n");
+        return 1;
     }
 
-    else if ( bmi >= 18.5 && bmi <= 24.9)
-    {
-        strcpy(a, "Normal");
+    printf("Height (m): ");
+    if (scanf("%lf", &height) != 1) {
+        fprintf(stderr, "Error: height must be a number.\n");
+        return 1;
     }
 
-    else if ( bmi >= 24.9 && bmi <= 29.9)
-    {
-        strcpy(a, "overweight");
+    if (!calculate_bmi(mass, height, &bmi)) {
+        fprintf(stderr, "Error: mass and height must be finite and greater than zero.\n");
+        return 1;
     }
-    
-    printf(" You Are %s" , a);
-    
+
+    printf("BMI: %.2f\n", bmi);
+    printf("Category: %s\n", bmi_category(bmi));
     return 0;
 }
+#endif
